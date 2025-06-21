@@ -5,7 +5,7 @@ import { handleError } from "../../utils/errorHandler";
 export const booksRoutes = express.Router();
 
 // 1. Create Book
-booksRoutes.post("/books", async (req: Request, res: Response) => {
+booksRoutes.post("/", async (req: Request, res: Response) => {
   try {
     const body = req.body;
     const book = await Book.create(body);
@@ -20,7 +20,7 @@ booksRoutes.post("/books", async (req: Request, res: Response) => {
 });
 
 // 2. Get All Books
-booksRoutes.get("/books", async (req: Request, res: Response) => {
+booksRoutes.get("", async (req: Request, res: Response) => {
   try {
     const {
       filter,
@@ -43,7 +43,7 @@ booksRoutes.get("/books", async (req: Request, res: Response) => {
 });
 
 // 3. Get Book by ID
-booksRoutes.get("/books/:bookId", async (req: Request, res: Response) => {
+booksRoutes.get("/:bookId", async (req: Request, res: Response) => {
   try {
     const bookId = req.params.bookId;
     const book = await Book.findById(bookId);
@@ -59,7 +59,7 @@ booksRoutes.get("/books/:bookId", async (req: Request, res: Response) => {
 });
 
 // 4. Update Book
-booksRoutes.put("/books/:bookId", async (req: Request, res: Response) => {
+booksRoutes.put("/:bookId", async (req: Request, res: Response) => {
   try {
     const bookId = req.params.bookId;
     const updatedBody = req.body;
@@ -79,7 +79,7 @@ booksRoutes.put("/books/:bookId", async (req: Request, res: Response) => {
 });
 
 // 5. Delete Book
-booksRoutes.delete("/books/:bookId", async (req: Request, res: Response) => {
+booksRoutes.delete("/:bookId", async (req: Request, res: Response) => {
   try {
     const bookId = req.params.bookId;
     const book = await Book.findByIdAndDelete(bookId);
