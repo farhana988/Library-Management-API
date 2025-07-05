@@ -20,7 +20,7 @@ const bookSchema = new mongoose_1.Schema({
     },
     isbn: { type: String, required: true, unique: true },
     description: { type: String },
-    copies: { type: Number, required: true, min: 0 },
+    copies: { type: Number, required: true, min: [0, 'Copies must be a positive number'], },
     available: { type: Boolean, default: true },
 }, { versionKey: false, timestamps: true });
 exports.Book = (0, mongoose_1.model)("Book", bookSchema);

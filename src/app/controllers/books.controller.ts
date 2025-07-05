@@ -20,18 +20,13 @@ booksRoutes.post("/", async (req: Request, res: Response) => {
 });
 
 // 2. Get All Books
-booksRoutes.get("", async (req: Request, res: Response) => {
+booksRoutes.get("/", async (req: Request, res: Response) => {
   try {
-    const {
-      filter,
-      sortBy = "createdAt",
-      sort = "asc",
-      limit = "10",
-    } = req.query;
+    const { filter, sortBy = "createdAt", sort = "asc" } = req.query;
     const query = filter ? { genre: filter } : {};
-    const books = await Book.find(query)
-      .sort({ [sortBy as string]: sort === "asc" ? 1 : -1 })
-      .limit(Number(limit));
+    const books = await Book.find(query).sort({
+      [sortBy as string]: sort === "asc" ? 1 : -1,
+    });
     res.json({
       success: true,
       message: "Books retrieved successfully",
@@ -92,4 +87,3 @@ booksRoutes.delete("/:bookId", async (req: Request, res: Response) => {
     handleError(res, error);
   }
 });
-
